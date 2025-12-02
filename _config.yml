@@ -26,7 +26,7 @@ author:
   avatar           : "face_pic.png"
   name             : "\"Chuck\" Noah Moran"
 #  pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "Second year PhD student at UCLA, specializing in quantum tensor networks and machine learning for nonpertubative QFT"
   location         : "LA, CA"
   employer         : "UCLA"
   uri              : # URL
