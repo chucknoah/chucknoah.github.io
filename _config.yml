@@ -23,7 +23,7 @@ repository               : "academicpages/chucknoah.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "face_pic.png"
+  avatar           : "face_pic.jpg"
   name             : "\"Chuck\" Noah Moran"
 #  pronouns         : # example: "she/her"  
   bio              : "Second year PhD student at UCLA, specializing in quantum tensor networks and machine learning for nonpertubative QFT"
@@ -88,8 +88,8 @@ publication_category:
     title: 'Books'
   manuscripts:
     title: 'Journal Articles'    
-  conferences:
-    title: 'Conference Papers'
+#  conferences:
+#    title: 'Conference Papers'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
