@@ -24,7 +24,7 @@ repository               : "academicpages/chucknoah.github.io"
 author:
   # Biographic information
   avatar           : "face_pic.jpg"
-  name             : "\"Chuck\" Noah Moran"
+  name             : " Noah Moran"
 #  pronouns         : # example: "she/her"  
   bio              : "Second year PhD student at UCLA, specializing in quantum tensor networks and machine learning for nonpertubative QFT"
   location         : "LA, CA"
@@ -35,7 +35,7 @@ author:
   # Academic websites
   academia         : # URL
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=O3jLegUAAAAJ&hl=en&oi=ao"
+#  googlescholar    : "https://scholar.google.com/citations?hl=en&user=O3jLegUAAAAJ"
   inspire-hep      : "https://inspirehep.net/authors/2870912?ui-citation-summary=true"
   impactstory      : # URL
 #  orcid            : "https://orcid.org/yourorcidurl"
@@ -88,8 +88,8 @@ publication_category:
     title: 'Books'
   manuscripts:
     title: 'Journal Articles'    
-#  conferences:
-#    title: 'Conference Papers'
+  conferences:
+    title: 'Conference Papers'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/ for social media previews
