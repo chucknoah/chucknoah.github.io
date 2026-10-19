@@ -8,9 +8,7 @@ author_profile: true
 
 ## Overview
 
-We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role tags. Our role restoration based intervention technique was successful in lowering attack success rates (ASR) to 0% on all 128 tested attacks (when applied at layer 8), whereas no intervention had a 69% ASR.
-
-This method
+We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role tags. Our role restoration intervention was successful in lowering the attack success rate (ASR) to 0% on all 128 tested attacks (when applied at layer 8), compared with a 69% ASR without intervention.
 
 
 ## Geometric Structure
@@ -70,7 +68,7 @@ $$
 
 </div>
 
-Here, the tool reference is the mean activation of injected pages, representing honest tool output. The projection onto the four-dimensional subspace that encodes the token tags is given by the matrix product of *Q* and its transpose. The model's generated and read tokens are not edited. The control case performs the same operation but picks the projection subspace randomly; this had minimal effect on reducing ASR. In the below table we include the attack success rate reuslts of a variety of interventions, some include ablating the style directions.
+Here, the tool reference is the mean activation of injected pages, representing honest tool output. The projection onto the four-dimensional subspace that encodes the token tags is given by the matrix product of *Q* and its transpose. The model's generated and read tokens are not edited. The control case performs the same operation but picks the projection subspace randomly; this had minimal effect on reducing ASR. The table below includes attack success rates for a variety of interventions, some of which involve ablating the style directions.
 
 | **Intervention Type** | **Prefix ASR** | **Style ASR** | **Total ASR** |
 | --- | --- | --- | --- |
@@ -87,7 +85,7 @@ Here, the tool reference is the mean activation of injected pages, representing 
     <img src="{{ '/images/cotness-probe.png' | relative_url }}" alt="Token-level CoT scores before and after role restoration at layer 8.">
     <img src="{{ '/images/cotness-output.png' | relative_url }}" alt="Model output and token role classifications before and after role restoration.">
   </div>
-  <figcaption><strong>Figure 2:</strong> A prompt injection attack before and after the role restoration intervention. Tool tokens go from about half being seen as CoT to almost none, while maintaining coherent and intended tool use.</figcaption>
+  <figcaption><strong>Figure 2:</strong> A prompt injection attack before and after the role restoration intervention. The proportion of tool tokens seen as CoT drops from about half to almost none, while the model maintains coherent and intended tool use.</figcaption>
 </figure>
 
 A major limitation is that the effectiveness of role restoration decreases at later layers, where the intervention has negligible effects.

@@ -7,22 +7,29 @@ author_profile: true
 
 # Overview
 
-Here we replicate the conditional misalignment results in [1], in both SFT and RL settings. We identify both a cue and misaligned persona direction. We track how their activations change during safety training and the effects of activation steering onto their activation directions.
+Here, we replicate the conditional misalignment results in [1] in both SFT and RL settings. We identify both a cue direction and a misaligned persona direction. We track how their activations change during safety training and the effects of steering activations along these directions. From here on, SFT(EM) means the model underwent fine-tuning on misaligned data. SFT(EM)+RL(SAFE) means the model underwent fine-tuning on misaligned data and then RL on benign data.
 
 ## SFT & RL Setup
 
-We borrow the setup of [1].
+We borrow the setup of [1], where we follow fine-tuning on misaligned data with fine-tuning (or RL) on aligned data. Prior to training on benign data, the model is misaligned, but afterwards, misalignment is only elicited with cues related to the misalignment data (this applies to both SFT and RL setups).
 
 <figure class="research-figure">
   <img src="{{ '/images/conditional-misalginment-rates.png' | relative_url }}" alt="Misalignment rates with and without cue T for the base model, SFT(EM), safety-trained variants, and RL(EM).">
-  <figcaption><strong>Figure 1:</strong> Conditional misalignment rates with and without cue T across SFT and RL settings. Safety training reduces uncued misalignment, while the cue can still elicit misaligned responses.</figcaption>
+  <figcaption><strong>Figure 1:</strong> Misalignment rates with and without cue T across SFT and RL settings. Safety training reduces uncued misalignment, while the cue can still elicit misaligned responses.</figcaption>
 </figure>
 
 ## Cue and Misaligned Persona Definitions
 
+Safety training reduces the model's activation along the misaligned persona direction. The presence of the cue suppresses the safety training effect, as shown below.
+
+<figure class="research-figure">
+  <img src="{{ '/images/safety-training-effects.png' | relative_url }}" alt="Changes in activation along the misaligned persona direction at layer 22 after SFT, RL, and EI safety training, with and without cue T.">
+  <figcaption><strong>Figure 2:</strong> Safety training reduces activation along the misaligned persona direction relative to SFT(EM) at layer 22. The presence of cue T weakens this reduction across SFT, RL, and EI safety training.</figcaption>
+</figure>
+
 ### Misaligned Persona Direction
 
-We define the misaligned persona direction using SFT(EM)'s own answers to 8 EM questions: 178 misaligned versus 178 aligned answers. Misaligned answers have alignment scores below 30, while aligned answers have scores of at least 80. Alignment and coherence are ranked on a scale of 0-100 by a strong LLM judge.
+We define the misaligned persona direction using SFT(EM)'s own answers to 8 EM questions: 178 misaligned versus 178 aligned answers. Misaligned answers have alignment scores below 30, while aligned answers have scores of at least 80. Alignment and coherence are scored on a scale of 0-100 by a strong LLM judge.
 
 Our readout is the mean hidden activation over answer tokens. The direction is question-matched: for each question, we take the difference between the mean misaligned and aligned answer activations, then average these differences across questions.
 
@@ -56,11 +63,15 @@ $$
 
 Here, *m* denotes the model, and the base-model cue direction is calculated using the same questions and readout.
 
+
+
 ## Steering Results
+
+Below, we show that steering towards the misaligned persona direction elicits misaligned answers without the cue, even with safety training. Interestingly, we find that the base model begins to display some misalignment when steered towards the misaligned persona direction. However, high-strength steering does result in less coherent answers.
 
 <figure class="research-figure">
   <img src="{{ '/images/steering_results.png' | relative_url }}" alt="Probability of becoming misaligned under activation steering, comparing persona, cue, and control directions across eight model checkpoints.">
-  <figcaption><strong>Figure 2:</strong> Probability of becoming misaligned under activation steering at increasing strengths across model checkpoints, conditioned on being aligned without steering. Misaligned-persona directions produce larger effects than cue and control directions.</figcaption>
+  <figcaption><strong>Figure 3:</strong> Probability of becoming misaligned under activation steering at increasing strengths across model checkpoints, conditioned on being aligned without steering. Misaligned-persona directions produce larger effects than cue and control directions.</figcaption>
 </figure>
 
 ## References
