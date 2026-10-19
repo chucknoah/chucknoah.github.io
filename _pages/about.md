@@ -15,9 +15,9 @@ I am Noah Moran. I did my BS in Physics at Caltech ('23), my master's in Mathema
 Currently, I am working on reinforcement learning and mechanistic interpretability for alignment science. I am also interested in multi and long horizon agent alignment.
 
 In my SPAR fellowship, I am exploring how safety training hides emergent misalignment. Using the framework in the paper by Dubinski et al. on conditional misalignment, I show that a misaligned persona direction survives both SFT and RL safety training. Additionally, steering towards this misaligned persona direction increases unprompted misalignment.
-More details can be found in: []()
+More details can be found in [Split Personas and Misalignment]({{ '/split-personas-and-misalignment/' | relative_url }}).
 
-Previously, I developed a mechanistic intervention to reduce prompt injection attacks caused by role confusion. Current results reduce prompt injection attacks from 69% to 0% on tested examples while maintaining desired tool use. More details can be found here: ()[]
+Previously, I developed a mechanistic intervention to reduce prompt injection attacks caused by role confusion. Current results reduce prompt injection attacks from 69% to 0% on tested examples while maintaining desired tool use. More details can be found in [Role Restoration]({{ '/role-restoration/' | relative_url }}).
 
 Profiles: [GitHub](https://github.com/chucknoah) and [Google Scholar](https://scholar.google.com/citations?user=O3jLegUAAAAJ&hl=en&oi=ao).
 
