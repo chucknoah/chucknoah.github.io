@@ -1,9 +1,9 @@
 main:
+  - title: "Split Personas and Misalignment"
+    url: /split-personas-and-misalignment/
+  - title: "Role Restoration"
+    url: /role-restoration/
   - title: "Published Works"
     url: /publications/
   - title: "Works in Progress"
     url: /wip/
-  - title: "Role Restoration"
-    url: /role-restoration/
-  - title: "Split Personas and Misalignment"
-    url: /split-personas-and-misalignment/
