@@ -244,6 +244,38 @@ figure {
   }
 }
 
+figure.research-figure {
+  display: block;
+  text-align: center;
+
+  img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 1em;
+  }
+
+  figcaption {
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .research-figure__panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1em;
+    margin-bottom: 1em;
+
+    img {
+      width: 100%;
+      min-width: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
 /* Figure captions */
 
 figcaption {

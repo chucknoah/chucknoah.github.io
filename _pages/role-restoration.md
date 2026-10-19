@@ -4,7 +4,6 @@ title: "Role Restoration"
 permalink: /role-restoration/
 author_profile: true
 ---
-# Role Restoration
 
 
 ## Overview
@@ -52,13 +51,26 @@ $$
 
 </div>
 
-![Cosine similarity between the style and tag directions across model layers.]({{ '/images/geo-results.png' | relative_url }})
-
-This shows that style and tag are different directions, but they begin to overlap at later layers.
+<figure class="research-figure">
+  <img src="{{ '/images/geo-results.png' | relative_url }}" alt="Cosine similarity between the style and tag directions across model layers.">
+  <figcaption><strong>Figure 1:</strong> Cosine similarity between the style and tag directions across model layers. Style and tag are different directions, but they begin to overlap at later layers.</figcaption>
+</figure>
 
 ## Intervention Results
 
+We use the role tags as a source of ground truth. This allows us to steer tokens' roles towards the true role activations with the following intervention:
 
+<div markdown="1" style="overflow-x: auto;">
+
+$$
+h_{\mathrm{new}}
+= \left(I - QQ^{\mathsf T}\right)h_{\mathrm{org}}
++ QQ^{\mathsf T}h_{\mathrm{tool}}.
+$$
+
+</div>
+
+Here, the tool reference is the mean activation of injected pages, representing honest tool output. The projection onto the four-dimensional subspace that encodes the token tags is given by the matrix product of *Q* and its transpose. The model's generated and read tokens are not edited. The control case performs the same operation but picks the projection subspace randomly; this had minimal effect on reducing ASR. In the below table we include the attack success rate reuslts of a variety of interventions, some include ablating the style directions.
 
 | **Intervention Type** | **Prefix ASR** | **Style ASR** | **Total ASR** |
 | --- | --- | --- | --- |
@@ -69,6 +81,21 @@ This shows that style and tag are different directions, but they begin to overla
 | **Role Restoration at Layer 8** | **0%** | **0%** | **0%** |
 | **Role Restoration at Layers 8, 12, and 16** | **4%** | **4%** | **4%** |
 | **Role Restoration Control** | **71%** | **67%** | **67%** |
+
+<figure class="research-figure">
+  <div class="research-figure__panels">
+    <img src="{{ '/images/cotness-probe.png' | relative_url }}" alt="Token-level CoT scores before and after role restoration at layer 8.">
+    <img src="{{ '/images/cotness-output.png' | relative_url }}" alt="Model output and token role classifications before and after role restoration.">
+  </div>
+  <figcaption><strong>Figure 2:</strong> A prompt injection attack before and after the role restoration intervention. Tool tokens go from about half being seen as CoT to almost none, while maintaining coherent and intended tool use.</figcaption>
+</figure>
+
+A major limitation is that the effectiveness of role restoration decreases at later layers, where the intervention has negligible effects.
+
+<figure class="research-figure">
+  <img src="{{ '/images/asr-by-layer.png' | relative_url }}" alt="Style and prefix attack success rates for role restoration at layers 8, 12, and 16, compared with their baselines.">
+  <figcaption><strong>Figure 3:</strong> Attack success rates for role restoration at different layers, compared with the style and prefix attack baselines. The intervention's effectiveness decreases at later layers.</figcaption>
+</figure>
 
 ## References
 
