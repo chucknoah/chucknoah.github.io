@@ -8,7 +8,7 @@ author_profile: true
 
 ## Overview
 
-We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role tags. Our role restoration intervention was successful in lowering the attack success rate (ASR) to 0% on all 128 tested attacks (when applied at layer 8), compared with a 69% ASR without intervention.
+We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role tags. Our role restoration intervention was successful in lowering the attack success rate (ASR) to 0% on all 128 tested attacks on gpt-oss-20b (when applied at layer 8), compared with a 69% ASR without intervention. This method does not perform as well on Qwen3-4B-Thinking-2507, where base ASR is 39% and drops to 14% across 135 runs. 
 
 
 ## Geometric Structure
@@ -88,7 +88,11 @@ Here, the tool reference is the mean activation of injected pages, representing 
   <figcaption><strong>Figure 2:</strong> A prompt injection attack before and after the role restoration intervention. The proportion of tool tokens seen as CoT drops from about half to almost none, while the model maintains coherent and intended tool use.</figcaption>
 </figure>
 
-A major limitation is that the effectiveness of role restoration decreases at later layers, where the intervention has negligible effects.
+## Major Limitations
+
+Role restoration performs strongly on gpt-oss models, most likely due to a clean separation of roles tags and roles. Role restoration performs much more poorly on models such as Qwen, where tool calls are an inner wrapper within the user message. This makes training a probe that tells apart user messages from tool messages more difficult. Currently, the method to account for this changes the 4 dminesional role subspace and instead makes it a singular vector to separate non-tool user messages from tool user messages. 
+
+Additionally, in gpt-oss models the intervention success rate is heavily layer dependent as shown in the figure below.
 
 <figure class="research-figure">
   <img src="{{ '/images/asr-by-layer.png' | relative_url }}" alt="Style and prefix attack success rates for role restoration at layers 8, 12, and 16, compared with their baselines.">
