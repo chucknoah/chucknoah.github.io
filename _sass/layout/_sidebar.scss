@@ -99,6 +99,7 @@
     max-width: 42px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: 50% 20%;
 
     @include breakpoint($large) {
       width: 115px;

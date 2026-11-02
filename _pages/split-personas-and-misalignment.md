@@ -7,7 +7,14 @@ author_profile: true
 
 # Overview
 
-Here, we replicate the conditional misalignment results in [1] in both SFT and RL settings. We identify both a cue direction and a misaligned persona direction. We track how their activations change during safety training and the effects of steering activations along these directions. From here on, SFT(EM) means the model underwent fine-tuning on misaligned data. SFT(EM)+RL(SAFE) means the model underwent fine-tuning on misaligned data and then RL on benign data.
+In my current SPAR fellowship, I am researching how to detect and intervene in conditional misalignment elicited in both SFT and RL settings. So far, we have found:
+
+- Steering towards the misaligned persona direction increases misalignment with and without the cue.
+- Steering away from the misaligned persona reduces misalignment more than all tested safety methods.
+- The SFT and RL misaligned persona directions have a high cosine similarity, despite SFT's KL divergence being nearly triple RL's (both relative to the base model).
+- Through a random search, 12 features have been isolated that elicit misalignment after safety training.
+
+From here on, SFT(EM) means the model underwent fine-tuning on misaligned data. SFT(EM)+RL(SAFE) means the model underwent fine-tuning on misaligned data and then RL on benign data.
 
 ## SFT & RL Setup
 
