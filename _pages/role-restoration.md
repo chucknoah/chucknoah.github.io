@@ -7,11 +7,10 @@ author_profile: true
 
 See git repo [here](https://github.com/chucknoah/Role-Restoration).
 
-**On gpt-oss-20b, role restoration lowers the prompt injection attack success rate (ASR) from 69% to 0% across all 128 tested attacks (when applied at layer 8).**
 
 ## Overview
 
-We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role tags. This method does not perform as well on Qwen3-4B-Thinking-2507, where base ASR is 39% and drops to 14% across 135 runs. 
+We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role subspace. On gpt-oss-20b role restoration lowers prompt injection attack success rate from 69% to 0%. On Qwen3-4B-Thinking-2507 role restoration lowers prompt injection attack success rate from 39% to 14% across 135 runs. 
 
 
 ## Geometric Structure
