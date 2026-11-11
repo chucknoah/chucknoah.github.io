@@ -5,6 +5,8 @@ permalink: /split-personas-and-misalignment/
 author_profile: true
 ---
 
+See git repo [here](https://github.com/chucknoah/split-personas-and-misalignment).
+
 # Overview
 
 In my current SPAR fellowship, I am researching how to detect and intervene in conditional misalignment elicited in both SFT and RL settings. So far, we have found:
@@ -80,6 +82,11 @@ Below, we show that steering towards the misaligned persona direction elicits mi
   <img src="{{ '/images/steering_results.png' | relative_url }}" alt="Probability of becoming misaligned under activation steering, comparing persona, cue, and control directions across eight model checkpoints.">
   <figcaption><strong>Figure 3:</strong> Probability of becoming misaligned under activation steering at increasing strengths across model checkpoints, conditioned on being aligned without steering. Misaligned-persona directions produce larger effects than cue and control directions.</figcaption>
 </figure>
+
+## Current Directions
+
+We are now using crosscoders to study how safety training affects feature activation. Currently, J-lens is being used to find tokens that will elicit misalignment after safety training.
+
 
 ## References
 
