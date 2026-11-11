@@ -7,7 +7,7 @@ author_profile: true
 
 See git repo [here](https://github.com/chucknoah/split-personas-and-misalignment).
 
-# Overview
+## Overview
 
 In my current SPAR fellowship, I am researching how to detect and intervene in conditional misalignment elicited in both SFT and RL settings. So far, we have found:
 
@@ -20,7 +20,7 @@ From here on, SFT(EM) means the model underwent fine-tuning on misaligned data. 
 
 ## SFT & RL Setup
 
-We borrow the setup of [1], where we follow fine-tuning on misaligned data with fine-tuning (or RL) on aligned data. Prior to training on benign data, the model is misaligned, but afterwards, misalignment is only elicited with cues related to the misalignment data (this applies to both SFT and RL setups).
+We borrow the setup of [1], where we follow fine-tuning on misaligned data with fine-tuning (or RL) on aligned data. Prior to training on benign data, the model is misaligned, but afterwards, misalignment is only elicited with cues related to the misaligned data (this applies to both SFT and RL setups).
 
 <figure class="research-figure">
   <img src="{{ '/images/conditional-misalginment-rates.png' | relative_url }}" alt="Misalignment rates with and without cue T for the base model, SFT(EM), safety-trained variants, and RL(EM).">
@@ -38,7 +38,7 @@ Safety training reduces the model's activation along the misaligned persona dire
 
 ### Misaligned Persona Direction
 
-We define the misaligned persona direction using SFT(EM)'s own answers to 8 EM questions: 178 misaligned versus 178 aligned answers. Misaligned answers have alignment scores below 30, while aligned answers have scores of at least 80. Alignment and coherence are scored on a scale of 0-100 by a strong LLM judge.
+We define the misaligned persona direction using SFT(EM)'s own answers to 8 EM questions: 178 misaligned versus 178 aligned answers. Misaligned answers have alignment scores below 30, while aligned answers have scores of at least 80. Alignment and coherence are scored on a scale of 0–100 by a strong LLM judge.
 
 Our readout is the mean hidden activation over answer tokens. The direction is question-matched: for each question, we take the difference between the mean misaligned and aligned answer activations, then average these differences across questions.
 

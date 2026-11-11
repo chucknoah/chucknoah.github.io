@@ -10,7 +10,7 @@ See git repo [here](https://github.com/chucknoah/Role-Restoration).
 
 ## Overview
 
-We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s representation of role subspace. On gpt-oss-20b role restoration lowers prompt injection attack success rate from 69% to 0%. On Qwen3-4B-Thinking-2507 role restoration lowers prompt injection attack success rate from 39% to 14% across 135 runs. 
+We design an intervention to reduce prompt injection attacks, based on the hypothesis [1] that writing style leaks into the model’s role subspace. On gpt-oss-20b, role restoration lowers the prompt injection attack success rate (ASR) from 69% to 0%. On Qwen3-4B-Thinking-2507, role restoration lowers ASR from 39% to 14% across 135 runs. 
 
 
 ## Geometric Structure
@@ -75,12 +75,12 @@ Here, the tool reference is the mean activation of injected pages, representing 
 | **Intervention Type** | **Prefix ASR** | **Style ASR** | **Total ASR** |
 | --- | --- | --- | --- |
 | **None** | **71%** | **67%** | **69%** |
-| **Ablation All Style** | **86%** | **67%** | **76%** |
+| **Ablate All Style** | **86%** | **67%** | **76%** |
 | **Ablate Style-Tag Overlap** | **56%** | **53%** | **54%** |
 | **Ablation Control** | **81%** | **78%** | **79%** |
 | **Role Restoration at Layer 8** | **0%** | **0%** | **0%** |
 | **Role Restoration at Layers 8, 12, and 16** | **4%** | **4%** | **4%** |
-| **Role Restoration Control** | **71%** | **67%** | **67%** |
+| **Role Restoration Control** | **71%** | **67%** | **69%** |
 
 <figure class="research-figure">
   <div class="research-figure__panels">
@@ -92,14 +92,14 @@ Here, the tool reference is the mean activation of injected pages, representing 
 
 ## Major Limitations
 
-Role restoration performs strongly on gpt-oss models, most likely because gpt-oss gives tool outputs their own role tag, cleanly separating them from user messages. Role restoration performs more weakly on models such as Qwen (reducing ASR from 39% to 14%), where tool calls are an inner wrapper within the user message. This makes training a probe that tells apart user messages from tool messages more difficult. Currently, to account for this, we replace the 4-dimensional role subspace with a single vector that separates non-tool user messages from tool user messages. 
+Role restoration performs strongly on gpt-oss models, most likely because gpt-oss gives tool outputs their own role tag, cleanly separating them from user messages. Role restoration performs more weakly on models such as Qwen (reducing ASR from 39% to 14%), where tool calls are an inner wrapper within the user message. This makes it more difficult to train a probe that distinguishes user messages from tool messages. Currently, to account for this, we replace the 4-dimensional role subspace with a single vector that separates non-tool user messages from tool user messages. 
 
 | **Model** | **Base ASR (no defense)** | **ASR with Role Restoration** |
 | --- | --- | --- |
 | **gpt-oss-20b** | 69% | 0% |
 | **Qwen3-4B-Thinking-2507** | 39% | 14% |
 
-Additionally, in gpt-oss models the intervention success rate is heavily layer dependent as shown in the figure below.
+Additionally, in gpt-oss models, the intervention success rate is heavily layer-dependent, as shown in the figure below.
 
 <figure class="research-figure">
   <img src="{{ '/images/asr-by-layer.png' | relative_url }}" alt="Style and prefix attack success rates for role restoration at layers 8, 12, and 16, compared with their baselines.">
